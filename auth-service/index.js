@@ -7,5 +7,5 @@ const app = express()
 app.use(express.json())
 app.use('/', routes)
 
-console.log("Running Express Server on Port: " + keys.PORT);
+console.log("Running Express Server on Port: " + keys.PORT)
 app.listen(keys.PORT)

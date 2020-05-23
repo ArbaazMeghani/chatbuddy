@@ -33,6 +33,7 @@ async function signup(username, password) {
   }
 
   users.save(user)
+  return await login(username, password)
 }
 
 module.exports = {

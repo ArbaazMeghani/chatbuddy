@@ -18,8 +18,8 @@ router.post("/login", async (req, res) => {
 })
 
 router.post("/signup", async (req, res) => {
-    await authenticate.signup(req.body.username, req.body.password)
-    res.status(201).send()
+    token = await authenticate.signup(req.body.username, req.body.password)
+    res.status(201).send(token)
 })
 
 module.exports = router;
