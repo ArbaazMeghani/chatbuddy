@@ -1,0 +1,15 @@
+.root {
+  outline-style: solid;
+}
+.message-container {
+  min-height: 400px;
+  min-width: 200px;
+}
+
+.message-composer {
+  outline-style: solid;
+}
+
+.message-text-box {
+  width: 100%
+}
