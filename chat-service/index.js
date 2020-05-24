@@ -1,12 +1,15 @@
 const express = require('express')
 const keys = require('./config/keys')
+const authorization = require('authorization')
 
 const app = express()
 app.use(express.json())
 
-app.get('/', (req, res) => {
+const verifyToken = authorization.verifyToken(keys.JWT_SECRET)
+
+app.get('/', verifyToken, (req, res) => {
   res.status(200).send("Success")
 })
 
-console.log("Running Express Server on Port: " + keys.PORT)
+console.log("Chat-Service: Running Express Server on Port: " + keys.PORT)
 app.listen(keys.PORT)

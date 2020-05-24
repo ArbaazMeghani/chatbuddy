@@ -2,8 +2,7 @@ const jwt = require('jsonwebtoken')
 
 function verifyToken(jwtSecret) {
   return function (req, res, next) {
-    authHeader = req.headers['authorization']
-    token = authHeader && authHeader.split(' ')[1]
+    token = req.headers['authorization']
 
     if(token == null) {
       return res.status(401).send()
@@ -19,4 +18,4 @@ function verifyToken(jwtSecret) {
   }
 }
 
-module.exports = verifyToken
+module.exports.verifyToken = verifyToken
