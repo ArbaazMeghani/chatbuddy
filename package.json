@@ -4,7 +4,8 @@
   "description": "A chat application",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"nodemon ./auth-service/index.js\" \"nodemon ./chat-service/index.js\" ",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"nodemon ./auth-service/index.js\" \"nodemon ./chat-service/index.js\" \"npm run frontend\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Arbaaz Meghani",
