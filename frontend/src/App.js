@@ -11,6 +11,7 @@ class App extends React.Component {
     super()
 
     this.state = {
+      socket: socketIOClient(keys.CHAT_SERVICE_URL),
       message: "",
       messages: [],
       id: 0
@@ -18,19 +19,22 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const socket = socketIOClient(keys.CHAT_SERVICE_URL);
-    socket.on("chat-message", data => {
-      console.log(data)
-      this.setState({receivedMessage: data})
+    this.state.socket.on("chat-message", receivedMessage => {
+      console.log(receivedMessage)
+      this.publishMessage(receivedMessage)
     });
   }
 
   publishMessage = (message) => {
     this.setState({
-    messages: [...this.state.messages, <div key={this.state.id}>{message}}</div>],
+      messages: [...this.state.messages, <div key={this.state.id}>{message}</div>],
       id: this.state.id + 1,
       message: ""
     })
+  }
+
+  broadcastMessage = (message) => {
+    this.state.socket.emit("chat-message", message)
   }
 
   handleChange = (event) => {
@@ -39,12 +43,16 @@ class App extends React.Component {
 
   handleSend = (event) => {
     event.preventDefault()
-    if(this.state.message === "") {
+    const message = this.state.message
+
+    if(message === "") {
       return
     }
 
-    console.log("send button clicked with message: " + this.state.message)
-    this.publishMessage(this.state.message)
+    console.log("send button clicked with message: " + message)
+
+    this.publishMessage(message)
+    this.broadcastMessage(message)
   }
 
   render() {
