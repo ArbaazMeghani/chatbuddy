@@ -4,6 +4,7 @@ import keys from "../config/keys"
 import { Button, TextField, Grid } from "@material-ui/core"
 import SendIcon from '@material-ui/icons/Send'
 import Message from './components/message'
+import MessageContainer from './components/message-container'
 import './styles/chat.css'
 
 class Chat extends React.Component {
@@ -61,9 +62,7 @@ class Chat extends React.Component {
     console.log(this.state.messages)
     return (
       <div className="root">
-        <div className="message-container">
-          {this.state.messages}
-        </div>
+        <MessageContainer messages={this.state.messages} />
         <div className="message-composer">
           <form onSubmit={this.handleSend}>
             <Grid container spacing={0} alignItems="center">
