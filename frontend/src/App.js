@@ -21,13 +21,13 @@ class App extends React.Component {
   componentDidMount() {
     this.state.socket.on("chat-message", receivedMessage => {
       console.log(receivedMessage)
-      this.publishMessage(receivedMessage)
+      this.publishMessage(receivedMessage, "receiver")
     });
   }
 
-  publishMessage = (message) => {
+  publishMessage = (message, userType) => {
     this.setState({
-      messages: [...this.state.messages, <div key={this.state.id}>{message}</div>],
+      messages: [<div className={userType} key={this.state.id}>{message}</div>, ...this.state.messages],
       id: this.state.id + 1,
       message: ""
     })
@@ -51,7 +51,7 @@ class App extends React.Component {
 
     console.log("send button clicked with message: " + message)
 
-    this.publishMessage(message)
+    this.publishMessage(message, "sender")
     this.broadcastMessage(message)
   }
 
