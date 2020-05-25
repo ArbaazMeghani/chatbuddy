@@ -3,7 +3,8 @@ import socketIOClient from "socket.io-client"
 import keys from "../config/keys"
 import { Button, TextField, Grid } from "@material-ui/core"
 import SendIcon from '@material-ui/icons/Send'
-import './styles/Chat.css'
+import Message from './components/message'
+import './styles/chat.css'
 
 class Chat extends React.Component {
 
@@ -26,8 +27,9 @@ class Chat extends React.Component {
   }
 
   publishMessage = (message, userType) => {
+    const messageComponent = <Message key={this.state.id} userType={userType} message={message}/>
     this.setState({
-      messages: [<div className={userType} key={this.state.id}>{message}</div>, ...this.state.messages],
+      messages: [messageComponent, ...this.state.messages],
       id: this.state.id + 1,
       message: ""
     })
