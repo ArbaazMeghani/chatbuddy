@@ -1,5 +1,7 @@
 import React from 'react'
 import { TextField, Button, Grid } from '@material-ui/core'
+import Axios from 'axios'
+import keys from '../config/keys'
 
 class Authentication extends React.Component {
 
@@ -26,20 +28,34 @@ class Authentication extends React.Component {
     })
   }
 
-  handleSignUp = () => {
+  handleSignUp = async () => {
     if(this.state.username === "" || this.state.password === "") {
       return
     }
     console.log(this.state.username)
     console.log(this.state.password)
+
+    const token = await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
+      username: this.state.username,
+      password: this.state.password
+    })
+
+    console.log(token)
   }
 
-  handleLogin = () => {
+  handleLogin = async () => {
     if(this.state.username === "" || this.state.password === "") {
       return
     }
     console.log(this.state.username)
     console.log(this.state.password)
+
+    const token = await Axios.post(keys.AUTH_SERVICE_URL + "/login", {
+      username: this.state.username,
+      password: this.state.password
+    })
+
+    console.log(token)
   }
 
   render() {
