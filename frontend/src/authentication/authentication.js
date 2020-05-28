@@ -29,33 +29,23 @@ class Authentication extends React.Component {
   }
 
   handleSignUp = async () => {
-    if(this.state.username === "" || this.state.password === "") {
-      return
-    }
-    console.log(this.state.username)
-    console.log(this.state.password)
-
-    const token = await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
-      username: this.state.username,
-      password: this.state.password
-    })
-
-    console.log(token)
+    console.log(await this.authenticate("/signup"))
   }
 
+  
   handleLogin = async () => {
+    console.log(await this.authenticate("/login"))
+  }
+
+  authenticate = async (endpoint) => {
     if(this.state.username === "" || this.state.password === "") {
       return
     }
-    console.log(this.state.username)
-    console.log(this.state.password)
 
-    const token = await Axios.post(keys.AUTH_SERVICE_URL + "/login", {
+    return await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
       username: this.state.username,
       password: this.state.password
     })
-
-    console.log(token)
   }
 
   render() {
