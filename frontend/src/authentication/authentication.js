@@ -29,12 +29,12 @@ class Authentication extends React.Component {
   }
 
   handleSignUp = async () => {
-    console.log(await this.authenticate("/signup"))
+    this.authenticate("/signup")
   }
 
   
   handleLogin = async () => {
-    console.log(await this.authenticate("/login"))
+    this.authenticate("/login")
   }
 
   authenticate = async (endpoint) => {
@@ -42,10 +42,13 @@ class Authentication extends React.Component {
       return
     }
 
-    return await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
+    const token = await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
       username: this.state.username,
       password: this.state.password
     })
+
+    console.log(token)
+    this.props.history.push('/')
   }
 
   render() {
