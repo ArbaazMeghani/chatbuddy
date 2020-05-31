@@ -21,7 +21,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("RENDERED")
     return (
       <Router>
         <this.protectedChat authToken={Cookies.get("authToken")}/>
@@ -32,7 +31,6 @@ class App extends React.Component {
 
   protectedChat = ({authToken}) => {
     if(!authToken) {
-      console.log("redirect to auth")
       return <Redirect to="/auth" />
     }
 
@@ -48,7 +46,6 @@ class App extends React.Component {
 
   authentication = ({authToken}) => {
     if(authToken) {
-      console.log("redirect to app")
       return <Redirect to="/" />
     }
 
