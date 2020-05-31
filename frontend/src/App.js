@@ -5,21 +5,6 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import Cookies from 'js-cookie'
 
 class App extends React.Component {
-
-  constructor() {
-    super()
-
-    this.state = {
-      authToken: undefined
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      authToken: Cookies.get("authToken")
-    })
-  }
-
   render() {
     return (
       <Router>
