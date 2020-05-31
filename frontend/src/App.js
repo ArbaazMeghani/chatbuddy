@@ -19,14 +19,9 @@ class App extends React.Component {
       return <Redirect to="/auth" />
     }
 
-    try {
-      return <Route exact path="/">
-        <Chat update={this.handleUpdate} />
-      </Route>
-    } catch(err) {
-      Cookies.remove("authToken")
-      return <Redirect to="/auth" />
-    }
+    return <Route exact path="/">
+      <Chat update={this.handleUpdate} />
+    </Route>
   }
 
   authentication = ({authToken}) => {
