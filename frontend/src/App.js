@@ -6,6 +6,20 @@ import Cookies from 'js-cookie'
 
 class App extends React.Component {
 
+  constructor() {
+    super()
+
+    this.state = {
+      authToken: undefined
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      authToken: Cookies.get("authToken")
+    })
+  }
+
   render() {
     console.log("RENDERED")
     return (
@@ -36,7 +50,13 @@ class App extends React.Component {
       return <Redirect to="/" />
     }
 
-    return <Route path="/auth" component={Authentication} />
+    return <Route path="/auth">
+      <Authentication update={this.handleUpdate} />
+    </Route>
+  }
+
+  handleUpdate = () => {
+    this.forceUpdate()
   }
 }
 

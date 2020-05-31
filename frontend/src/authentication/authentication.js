@@ -50,7 +50,7 @@ class Authentication extends React.Component {
 
     console.log(response.data.token)
     Cookie.set("authToken", response.data.token)
-    this.props.history.push('/')
+    this.props.update()
   }
 
   render() {
