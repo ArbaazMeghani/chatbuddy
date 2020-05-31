@@ -13,7 +13,9 @@ class Chat extends React.Component {
     super()
     
     this.state = {
-      socket: socketIOClient(keys.CHAT_SERVICE_URL),
+      socket: socketIOClient(keys.CHAT_SERVICE_URL, {
+        query: {token: Cookie.get("authToken")}
+      }),
       messages: [],
       id: 0
     }
