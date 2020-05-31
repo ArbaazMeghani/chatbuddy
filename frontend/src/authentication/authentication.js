@@ -2,6 +2,7 @@ import React from 'react'
 import { TextField, Button, Grid } from '@material-ui/core'
 import Axios from 'axios'
 import keys from '../config/keys'
+import Cookie from 'js-cookie'
 
 class Authentication extends React.Component {
 
@@ -42,12 +43,13 @@ class Authentication extends React.Component {
       return
     }
 
-    const token = await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
+    const response = await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
       username: this.state.username,
       password: this.state.password
     })
 
-    console.log(token)
+    console.log(response.data.token)
+    Cookie.set("authToken", response.data.token)
     this.props.history.push('/')
   }
 

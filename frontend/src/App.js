@@ -6,32 +6,19 @@ import Cookies from 'js-cookie'
 
 class App extends React.Component {
 
-  constructor() {
-    super()
-
-    this.state = {
-      authToken: undefined
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      authToken: Cookies.get("authToken")
-    })
-  }
-
   render() {
     console.log("RENDERED")
     return (
       <Router>
-        <this.protectedChat authToken={this.state.authToken}/>
-        <this.authentication authToken={this.state.authToken}/>
+        <this.protectedChat authToken={Cookies.get("authToken")}/>
+        <this.authentication authToken={Cookies.get("authToken")}/>
       </Router>
     )
   }
 
   protectedChat = ({authToken}) => {
     if(!authToken) {
+      console.log("redirect to auth")
       return <Redirect to="/auth" />
     }
 
@@ -45,6 +32,7 @@ class App extends React.Component {
 
   authentication = ({authToken}) => {
     if(authToken) {
+      console.log("redirect to app")
       return <Redirect to="/" />
     }
 
