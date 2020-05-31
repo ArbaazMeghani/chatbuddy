@@ -44,7 +44,7 @@ class MessageComposer extends React.Component {
 
     this.props.handleSend({
       data: this.state.message,
-      username: "You"
+      user: "You"
     })
     this.setState({
       message: ""
