@@ -42,8 +42,6 @@ class MessageComposer extends React.Component {
       return
     }
 
-    console.log("send button clicked with message: " + this.state.message)
-
     this.props.handleSend({
       data: this.state.message,
       username: "You"

@@ -36,7 +36,6 @@ class Chat extends React.Component {
       this.handleConnectionError(err)
     })
     .on("chat-message", receivedMessage => {
-      console.log(receivedMessage)
       this.publishMessage(receivedMessage, "receiver")
     });
   }
