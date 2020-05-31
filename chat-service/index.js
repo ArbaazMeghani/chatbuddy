@@ -5,7 +5,10 @@ const authorization = require('authorization').verifyToken(keys.JWT_SECRET)
 io.use(authorization).on("connection", socket => {
   console.log("user connected")
   socket.on("chat-message", message => {
-    socket.broadcast.emit("chat-message", message)
+    socket.broadcast.emit("chat-message", {
+      data: message,
+      user: socket.decoded.username
+    })
   })
 })
 

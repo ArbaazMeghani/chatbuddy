@@ -55,7 +55,7 @@ class Chat extends React.Component {
 
   handleSend = (message) => {
     this.publishMessage(message, "sender")
-    this.broadcastMessage(message)
+    this.broadcastMessage(message.data)
   }
 
   handleConnectionError = (error) => {
