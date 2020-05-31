@@ -4,10 +4,14 @@ import '../styles/chat.css'
 class Message extends React.Component {
   render() {
     return (
-      <div className={this.props.userType}>
-        <h6>{this.props.message.user}</h6>
-        {this.props.message.data}
-      </div>
+      <>
+        <div className={this.props.userType}>
+          {this.props.message.data}
+        </div>
+        <h6 className={this.props.userType}>
+          {this.props.message.user}
+        </h6>
+      </>
     )
   }
 }

@@ -31,6 +31,22 @@
   margin-right: 2%;
 }
 
+.message-container h6 {
+  color: gray;
+  margin-bottom: 1%;
+  margin-left: 5%;
+  margin-right: 5%;
+  font-size: 8px;
+}
+
+.message-container h6.sender {
+  align-self: flex-end;
+}
+
+.message-container h6.receiver {
+  align-self: flex-start;
+}
+
 .message-container div.sender {
   align-self: flex-end;
   background-color: #007AFF;
