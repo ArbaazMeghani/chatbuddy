@@ -1,20 +1,16 @@
 const jwt = require('jsonwebtoken')
 
-function verifyToken(jwtSecret) {
-  return function (req, res, next) {
-    token = req.headers['authorization']
-
-    if(token == null) {
-      return res.status(401).send()
+function verifyToken(secret){
+  return (socket, next) => {
+    if (socket.handshake.query && socket.handshake.query.token) {
+      jwt.verify(socket.handshake.query.token, secret, (err, decoded) => {
+        if(err) next(new Error(403))
+        socket.decoded = decoded
+        next()
+      });
+    } else {
+      next(new Error(401))
     }
-
-    jwt.verify(token, jwtSecret, (err, user) => {
-      if(err) {
-        return res.status(403).send()
-      }
-    })
-
-    next()
   }
 }
 

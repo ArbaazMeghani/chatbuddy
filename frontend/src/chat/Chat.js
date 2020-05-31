@@ -5,6 +5,7 @@ import Message from './components/message'
 import MessageContainer from './components/message-container'
 import MessageComposer from './components/message-composer'
 import './styles/chat.css'
+import Cookie from 'js-cookie'
 
 class Chat extends React.Component {
   
@@ -28,7 +29,11 @@ class Chat extends React.Component {
   }
   
   componentDidMount() {
-    this.state.socket.on("chat-message", receivedMessage => {
+    this.state.socket
+    .on('error', (err) => {
+      this.handleConnectionError(err)
+    })
+    .on("chat-message", receivedMessage => {
       console.log(receivedMessage)
       this.publishMessage(receivedMessage, "receiver")
     });
@@ -51,6 +56,11 @@ class Chat extends React.Component {
     this.broadcastMessage(message)
   }
 
+  handleConnectionError = (error) => {
+    console.log(error)
+    Cookie.remove("authToken")
+    this.props.update()
+  }
 }
 
 export default Chat;

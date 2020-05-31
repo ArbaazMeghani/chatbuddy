@@ -37,7 +37,9 @@ class App extends React.Component {
     }
 
     try {
-      return <Route exact path="/" component={Chat} />
+      return <Route exact path="/">
+        <Chat update={this.handleUpdate} />
+      </Route>
     } catch(err) {
       Cookies.remove("authToken")
       return <Redirect to="/auth" />
