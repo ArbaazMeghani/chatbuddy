@@ -10,11 +10,18 @@ class App extends React.Component {
     super()
 
     this.state = {
-      authToken: Cookies.get("authToken")
+      authToken: undefined
     }
   }
 
+  componentDidMount() {
+    this.setState({
+      authToken: Cookies.get("authToken")
+    })
+  }
+
   render() {
+    console.log("RENDERED")
     return (
       <Router>
         <this.protectedChat authToken={this.state.authToken}/>
