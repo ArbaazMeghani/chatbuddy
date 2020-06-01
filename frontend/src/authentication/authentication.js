@@ -3,6 +3,7 @@ import { TextField, Button, Grid } from '@material-ui/core'
 import Axios from 'axios'
 import keys from '../config/keys'
 import Cookie from 'js-cookie'
+import {Route, Redirect } from 'react-router-dom'
 
 class Authentication extends React.Component {
 
@@ -73,4 +74,14 @@ class Authentication extends React.Component {
   }
 }
 
-export default Authentication
+function ProtectedAuthentication({update}) {
+  if(Cookie.get("authToken")) {
+    return <Redirect to="/" />
+  }
+
+  return <Route path="/auth">
+    <Authentication update={update} />
+  </Route>
+}
+
+export default ProtectedAuthentication
