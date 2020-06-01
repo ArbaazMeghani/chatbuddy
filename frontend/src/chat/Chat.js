@@ -6,6 +6,7 @@ import MessageContainer from './components/message-container'
 import MessageComposer from './components/message-composer'
 import './styles/chat.css'
 import Cookie from 'js-cookie'
+import { Route, Redirect } from 'react-router-dom'
 
 class Chat extends React.Component {
   
@@ -64,4 +65,15 @@ class Chat extends React.Component {
   }
 }
 
-export default Chat;
+function ProtectedChat({update}) {
+  const authToken = Cookie.get("authToken")
+  if(!authToken) {
+    return <Redirect to="/auth" />
+  }
+
+  return <Route exact path="/">
+    <Chat update={update} />
+  </Route>
+}
+
+export default ProtectedChat
