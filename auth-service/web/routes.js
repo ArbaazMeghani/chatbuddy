@@ -3,8 +3,9 @@ const authenticate = require('../service/authenticate')
 
 router = express.Router();
 
-router.get("/users", (req, res) => {
-  res.json(authenticate.retrieveUsers())
+router.get("/users", async (req, res) => {
+  const users = await authenticate.retrieveUsers()
+  res.json(users)
 })
 
 router.post("/login", async (req, res) => {

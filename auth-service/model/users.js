@@ -1,15 +1,21 @@
-const users = []
+const mongoose = require('mongoose')
 
-function findAll() {
-  return users;
+const users = mongoose.model("users", {
+  username: String,
+  password: String
+})
+
+async function findAll() {
+  return await users.find()
 }
 
-function findByUsername(username) {
-  return users.find(user => user.username === username)
+async function findByUsername(username) {
+  return await users.findOne({username: username})
 }
 
-function save(user) {
-  users.push(user)
+async function save(user) {
+  const newUser = new users(user)
+  await newUser.save()
 }
 
 module.exports = {

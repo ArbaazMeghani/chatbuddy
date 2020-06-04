@@ -3,12 +3,12 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const users = require('../model/users')
 
-function retrieveUsers() {
-  return users.findAll();
+async function retrieveUsers() {
+  return await users.findAll();
 }
 
 async function login(username, password) {
-  const user = users.findByUsername(username);
+  const user = await users.findByUsername(username);
 
   if(user == null) {
     console.log("user not found")
@@ -32,7 +32,7 @@ async function signup(username, password) {
     password: hashedPassword
   }
 
-  users.save(user)
+  await users.save(user)
   return await login(username, password)
 }
 
