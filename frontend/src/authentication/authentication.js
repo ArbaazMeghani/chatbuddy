@@ -44,7 +44,7 @@ class Authentication extends React.Component {
       return
     }
 
-    const response = await Axios.post(keys.AUTH_SERVICE_URL + "/signup", {
+    const response = await Axios.post(keys.AUTH_SERVICE_URL + endpoint, {
       username: this.state.username,
       password: this.state.password
     })
